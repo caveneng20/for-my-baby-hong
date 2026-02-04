@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person</title>
+    <style>
+        body {
+            background-color: #ffebee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 400px;
+            z-index: 10;
+        }
+
+        h1 { color: #d32f2f; margin-bottom: 20px; }
+        p { font-size: 1.2rem; color: #555; }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn { background-color: #ff4081; color: white; font-weight: bold; }
+        #noBtn { background-color: #bdbdbd; color: white; position: absolute; }
+
+        #message { display: none; color: #d32f2f; margin-top: 20px; font-weight: bold; }
+        
+        .heart {
+            position: fixed;
+            color: #ff4081;
+            font-size: 20px;
+            user-select: none;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="content">
+            <h1>Hi Beautiful! ❤️</h1>
+            <p>I've been thinking about you a lot lately... will you be my Valentine?</p>
+            <div class="buttons">
+                <button id="yesBtn" onclick="celebrate()">YES!</button>
+                <button id="noBtn" onmouseover="moveButton()">No</button>
+            </div>
+        </div>
+        <div id="message">
+            <h2>Yay! Best decision ever! 🌹</h2>
+            <p>I love you more than words can say. I can't wait to spend the day with you!</p>
+        </div>
+    </div>
+
+    <script>
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function celebrate() {
+            document.getElementById('content').style.display = 'none';
+            document.getElementById('message').style.display = 'block';
+            
+            // Create falling hearts
+            for(let i = 0; i < 50; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+
+            let top = -20;
+            const interval = setInterval(() => {
+                top += 2;
+                heart.style.top = top + 'px';
+                if (top > window.innerHeight) {
+                    heart.remove();
+                    clearInterval(interval);
+                }
+            }, 20);
+        }
+    </script>
+</body>
+</html>
