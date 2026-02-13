@@ -144,11 +144,11 @@
     <div id="photo-screen" class="card">
         <h2 style="color: #d32f2f;">Where it All Began... ❤️</h2>
         <img src="https://raw.githubusercontent.com/caveneng20/for-my-baby-hong/main/first-day.jpg" alt="Our First Day" class="memory-img">
-        <p style="line-height: 1.6; color: #444;">Looking at this photo, I realize that 03/12/23 wasn't just a date—it was the day my whole world changed. I didn't know then that you were the piece I was missing, but I thank my lucky stars every day since that you chose me. ❤️</p>
+        <p style="line-height: 1.6; color: #444;">Looking at this photo, I realize that 03/12/23 wasn't just a date. It was the day my whole world changed. I didn't know then that you were the piece I was missing, but I thank my lucky stars every day since that you chose me. ❤️</p>
         <button class="next-btn" onclick="showValentine()">Next ➔</button>
     </div>
 
-    <div id="valentine-screen" class="card">
+   <div id="valentine-screen" class="card">
         <div id="proposal-content">
             <h1 style="color: #d32f2f;">I have one more question...</h1>
             <p style="font-size: 1.4rem; color: #555;">Will you be my Valentine?</p>
@@ -157,10 +157,19 @@
                 <button id="noBtn" onclick="handleNo()">No</button>
             </div>
         </div>
+
         <div id="final-msg">
-            <h1 style="font-size: 3rem;">🌹❤️🌹</h1>
-            <h2 style="color: #d32f2f;">I knew you'd say yes!</h2>
-            <p style="font-size: 1.2rem;">You've made me the happiest person alive.<br>I love you forever!</p>
+            <h1 style="font-size: 2.5rem; margin-bottom: 10px;">🌹❤️🌹</h1>
+            <h2 style="color: #d32f2f; margin-bottom: 15px;">I knew you'd say yes!</h2>
+            
+            <img src="https://raw.githubusercontent.com/caveneng20/for-my-baby-hong/main/last.jpg" 
+                 alt="Our Memory" 
+                 style="width: 100%; max-width: 300px; border-radius: 20px; box-shadow: 0 10px 25px rgba(255, 64, 129, 0.3); margin-bottom: 20px;">
+
+            <p style="font-size: 1.2rem; color: #444; line-height: 1.5;">
+                You've made me the happiest person alive.<br>
+                <strong>I love you forever!</strong>
+            </p>
         </div>
     </div>
 
@@ -186,17 +195,12 @@
 
         function handleNo() {
             noClicks++;
-            
-            // "Yes" grows significantly
             yesScale += 0.6; 
             document.getElementById('yesBtn').style.transform = `scale(${yesScale})`;
-            
-            // "No" shrinks significantly
             noScale -= 0.25;
-            if (noScale < 0.1) noScale = 0.1; // Don't let it disappear completely yet
+            if (noScale < 0.1) noScale = 0.1;
             document.getElementById('noBtn').style.transform = `scale(${noScale})`;
 
-            // Trigger popup after 3 attempts
             if (noClicks >= 3) {
                 document.getElementById('sad-popup').style.display = 'block';
             }
@@ -211,9 +215,9 @@
             document.getElementById('final-msg').style.display = 'block';
             document.body.style.backgroundColor = "#fce4ec";
             
-            // Simple Heart Burst
-            for(let i=0; i<30; i++) {
-                setTimeout(createHeart, i * 100);
+            // Start the Heart Rain
+            for(let i=0; i<50; i++) {
+                setTimeout(createHeart, i * 150);
             }
         }
 
@@ -222,17 +226,18 @@
             heart.innerHTML = '❤️';
             heart.style.position = 'fixed';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.top = '100vh';
+            heart.style.top = '-5vh';
             heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
-            heart.style.transition = 'transform 3s linear, opacity 3s linear';
+            heart.style.zIndex = '1000';
+            heart.style.transition = 'transform 4s linear, opacity 4s linear';
             document.body.appendChild(heart);
 
             setTimeout(() => {
-                heart.style.transform = `translateY(-120vh) rotate(${Math.random() * 360}deg)`;
+                heart.style.transform = `translateY(110vh) rotate(${Math.random() * 360}deg)`;
                 heart.style.opacity = '0';
             }, 100);
             
-            setTimeout(() => heart.remove(), 3000);
+            setTimeout(() => heart.remove(), 4000);
         }
     </script>
 </body>
