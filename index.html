@@ -74,7 +74,11 @@
     </style>
 </head>
 <body>
-
+    <div id="sad-popup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:100; background:white; padding:20px; border-radius:20px; box-shadow: 0 0 50px rgba(0,0,0,0.5);">
+         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueHByZ3R6bm9pZ3R6bm9pZ3R6bm9pZ3R6bm9pZ3R6bm9pZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BEob5qwFkSJ7G/giphy.gif" width="200">
+        <p>Please... just click YES! 🥺</p>
+        <button onclick="document.getElementById('sad-popup').style.display='none'">Okay, fine...</button>
+    </div>
         <div id="lock-screen" class="card">
         <img src="https://raw.githubusercontent.com/caveneng20/for-my-baby-hong/main/lock.jpg" alt="Lock" class="lock-img">
         <h1>Unlock Our Story</h1>
@@ -114,7 +118,7 @@
                 document.getElementById('lock-screen').style.display = 'none';
                 document.getElementById('photo-screen').style.display = 'block';
             } else {
-                alert("That's not the right date! Try again, love.");
+                alert("That's not the right date! Try again, Sehyun Hong :).");
             }
         }
 
@@ -124,12 +128,28 @@
         }
 
         function moveButton() {
-            const btn = document.getElementById('noBtn');
-            // Makes the button jump around so she can't click "No"
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+            noCount++;
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+    
+            // 1. Get position of the Yes button to stay near it
+            const rect = yesBtn.getBoundingClientRect();
+    
+            // 2. Randomly move "No" within a 150px radius of "Yes"
+            const padding = 150;
+            const newX = rect.left + (Math.random() * (padding * 2) - padding);
+            const newY = rect.top + (Math.random() * (padding * 2) - padding);
+
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = newX + 'px';
+            noBtn.style.top = newY + 'px';
+
+            // 3. Pop-up logic after 3 attempts
+            if (noCount === 4) { // Appears on the 4th attempt
+                alert("Hey! Stop trying to say No! 😤 \n\nPlease choose the correct answer... I'm begging you!");
+                // Optional: Change the image to a 'sad cat' or begging face
+                // You can add a temporary image element here if you like!
+            }
         }
 
         function celebrate() {
